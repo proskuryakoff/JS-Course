@@ -33,11 +33,13 @@ function dominantDirection(text) {
   
     let total = scripts.reduce((n, {count}) => n + count, 0);
     if (total == 0) return "No scripts found";
-
-    let biggest = scripts.reduce(({count}) => Math.max(count));
+    console.log(scripts)
+    let biggest = scripts.reduce((a,b, {count}) => {
+      return a.count < b.count ? b : a;
+    });
     return biggest.direction;
 }
 
 console.log(dominantDirection('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
-console.log(dominantDirection("Hello!"));
-console.log(dominantDirection("Hey, مساء الخير"));
+console.log(dominantDirection("Helloااااااء ال!ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍"));
+console.log(dominantDirection("Hey, مساء الخيرᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍ᡁ‍"));
