@@ -25,7 +25,7 @@ function countBy(items, groupDir) {
     return counts;
 }
 
-  function dominantDirection(text) {
+function dominantDirection(text) {
     let scripts = countBy(text, char => {
       let script = characterScript(char.codePointAt(0));
       return script ? script.direction : "none";
