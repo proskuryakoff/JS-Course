@@ -1,7 +1,7 @@
 console.log ('Groups');
 
 class Group {
-    constructor(){
+    constructor(array){
         this.array = [];
     }
     add(value){
