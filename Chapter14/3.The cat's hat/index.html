@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+    <style>body { min-height: 200px }</style>
+    <img src="https://ecdn.teacherspayteachers.com/thumbitem/CVC-words-with-pictures-assessment--6074647-1601286596/original-6074647-1.jpg" id="cat" style="position: absolute">
+    <img src="https://newcontent.westmarine.com/content/images/catalog/full/P019363837_FUL.17102018013152.jpg" id="hat" style="position: absolute">
+    <script>
+        let cat = document.querySelector("#cat");
+        let hat = document.querySelector("#hat");
+
+        let angle = 0;
+        let lastTime = null;
+        function animate(time) {
+            if (lastTime != null) angle += (time - lastTime) * 0.001;
+            lastTime = time;
+            cat.style.top = 270 + 'px';
+            cat.style.left = 500 + 'px';
+            hat.style.top = (Math.sin(angle) * 300 + 300) + "px";
+            hat.style.left = (Math.cos(angle) * 500 + 500) + "px";
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>
