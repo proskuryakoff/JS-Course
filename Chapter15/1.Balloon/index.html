@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+    <p>🎈</p>
+    <script>
+        let bln = document.querySelector("p");
+        let size = bln.style.fontSize - "px";
+        function updSize(newSize){
+            bln.style.fontSize = newSize + "px";
+            size = newSize;
+        }
+        updSize(32);
+        window.addEventListener("keydown", function arrEvent(event) {
+            if (event.key == "ArrowUp") {
+                if (size <= 100){
+                    updSize(size * 1.1);
+                } else {
+                    bln.textContent = "💥";
+                    window.removeEventListener("keydown", arrEvent);
+                }
+                event.preventDefault();
+            }
+            if (event.key == "ArrowDown") {
+                updSize(size * 0.9);
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
