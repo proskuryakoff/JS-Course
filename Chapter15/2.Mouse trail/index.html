@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+    <style>
+        .trail { /* className for the trail elements */
+          position: absolute;
+          height: 6px; width: 6px;
+          border-radius: 3px;
+          background: teal;
+        }
+        body {
+          height: 300px;
+        }
+      </style>
+      
+      <script>
+          let trailArr = [];
+          let counter = 0;
+          for (let i = 0; i < 15; i++){
+                let dot = document.createElement("div");
+                dot.className = "trail";
+                trailArr.push(dot);
+                document.body.appendChild(dot);
+            }
+          window.addEventListener("mousemove", event => {
+            let currentDot = trailArr[counter];
+            currentDot.style.left = (event.pageX - 4) + "px";
+            currentDot.style.top = (event.pageY - 4) + "px";
+            counter = (counter + 1) % trailArr.length;
+          });
+
+      </script>
+</body>
+</html>

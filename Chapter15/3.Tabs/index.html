@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+  <tab-panel>
+    <div data-tabname="one">Tab one</div>
+    <div data-tabname="two">Tab two</div>
+    <div data-tabname="three">Tab three</div>
+  </tab-panel>
+  <script>
+    function asTabs(node) {
+      let tabs = Array.from(node.children).map(node =>{
+        let btn = document.createElement("button");
+        btn.textContent = node.getAttribute("data-tabname");
+        let tab = {node, btn};
+        btn.addEventListener("click", event => select(tab));
+        return tab;
+      });
+      function select(selectedTab){
+        for (let tab of tabs) {
+          let selected = tab == selectedTab;
+          if (selected) tab.node.style.display = ""
+          else tab.node.style.display = "none";
+          if (selected) tab.btn.style.color = "red";
+          else tab.btn.style.color = "";
+        }
+      }
+      let btnCollection = document.createElement("div");
+      for (let {btn} of tabs) btnCollection.appendChild(btn);
+      node.insertBefore(btnCollection, node.firstChild);
+      select(tabs[0]);
+  }
+  asTabs(document.querySelector("tab-panel"));
+  </script>
+</body>
+</html>
