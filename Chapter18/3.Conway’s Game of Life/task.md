@@ -15,9 +15,9 @@ Note that these rules are applied to the whole grid at once, not one square at a
 
 Implement this game using whichever data structure you find appropriate. Use Math.random to populate the grid with a random pattern initially. Display it as a grid of checkbox fields, with a button next to it to advance to the next generation. When the user checks or unchecks the checkboxes, their changes should be included when computing the next generation.
 
-<div id="grid"></div>
+<!-- <div id="grid"></div>
 <button id="next">Next generation</button>
 
 <script>
   // Your code here.
-</script>
+</script> -->
