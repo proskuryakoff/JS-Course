@@ -8,9 +8,3 @@ You can control the size of text (emoji are text) by setting the font-size CSS p
 The key names of the arrow keys are "ArrowUp" and "ArrowDown". Make sure the keys change only the balloon, without scrolling the page.
 
 When that works, add a feature where, if you blow up the balloon past a certain size, it explodes. In this case, exploding means that it is replaced with an 💥 emoji, and the event handler is removed (so that you can’t inflate or deflate the explosion).
-
-<p>🎈</p>
-
-<script>
-  // Your code here
-</script>

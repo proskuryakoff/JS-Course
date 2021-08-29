@@ -14,10 +14,3 @@ A neighbor is defined as any adjacent cell, including diagonally adjacent ones.
 Note that these rules are applied to the whole grid at once, not one square at a time. That means the counting of neighbors is based on the situation at the start of the generation, and changes happening to neighbor cells during this generation should not influence the new state of a given cell.
 
 Implement this game using whichever data structure you find appropriate. Use Math.random to populate the grid with a random pattern initially. Display it as a grid of checkbox fields, with a button next to it to advance to the next generation. When the user checks or unchecks the checkboxes, their changes should be included when computing the next generation.
-
-<!-- <div id="grid"></div>
-<button id="next">Next generation</button>
-
-<script>
-  // Your code here.
-</script> -->

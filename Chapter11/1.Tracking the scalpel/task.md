@@ -10,14 +10,3 @@ Write an async function locateScalpel that does this, starting at the nest on wh
 Next, write the same function again without using async and await.
 
 Do request failures properly show up as rejections of the returned promise in both versions? How?
-
-async function locateScalpel(nest) {
-  // Your code here.
-}
-
-function locateScalpel2(nest) {
-  // Your code here.
-}
-
-locateScalpel(bigOak).then(console.log);
-// → Butcher Shop
