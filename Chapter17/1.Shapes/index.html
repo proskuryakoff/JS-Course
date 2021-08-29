@@ -7,11 +7,68 @@
     <title>Task</title>
 </head>
 <body>
-  <canvas width="600" height="200"></canvas>
+  <canvas width="1280" height="720"></canvas>
   <script>
     let cx = document.querySelector("canvas").getContext("2d");
-  
-    // Your code here.
+
+    function trapezoid(){
+      cx.beginPath();
+      cx.moveTo(50, 10);
+      cx.lineTo(25, 80);
+      cx.lineTo(225, 80);
+      cx.lineTo(200, 10);
+      cx.lineTo(50,10);
+      cx.stroke();
+    }
+
+    function diamond(){
+      cx.translate(290,15);
+      cx.rotate(1/4 * Math.PI);
+      cx.fillStyle = "red";
+      cx.fillRect(0, 0, 40, 40);
+      cx.resetTransform();
+    }
+
+    function zigzag(){
+      cx.beginPath();
+      for (let y = 10; y < 100; y += 20) {
+        cx.moveTo(350, y);
+        cx.lineTo(450, y + 15);
+        cx.lineTo(350, y + 20);
+      }
+      cx.stroke();
+    }
+
+    function spiral(){
+      let radius = 0;
+      let angle = 0;
+      cx.beginPath();
+      cx.moveTo(550, 60);
+      for (let n = 0; n < 150; n++) {
+        radius += 0.4;
+        angle += (Math.PI * 2) / 50;
+        let x = 1100 / 2 + radius * Math.cos(angle);
+        let y = 120 / 2 + radius * Math.sin(angle);
+        cx.lineTo(x, y);
+    }
+    cx.stroke();
+};
+
+    function star(){
+      cx.beginPath();
+      cx.moveTo(740, 60);
+      for (let i = 1; i <= 6; i++) {
+      let angle = i * Math.PI / 3;
+      cx.quadraticCurveTo(700, 60,700 + Math.cos(angle) * 40, 60 + Math.sin(angle) * 40);
+    }  
+      cx.fillStyle = "orange";
+      cx.fill();
+    }
+    trapezoid();
+    diamond();
+    zigzag();
+    spiral();
+    star();
   </script>
 </body>
 </html>

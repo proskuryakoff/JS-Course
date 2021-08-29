@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+  <canvas width="400" height="400"></canvas>
+<script>
+  let canvas = document.querySelector("canvas");
+  let cx = canvas.getContext("2d");
+
+  let lastTime = null;
+  class Vec {
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+    }
+    plus(another){
+        return new Vec(this.x + another.x, this.y + another.y)
+    }
+    minus(another){
+        return new Vec(this.x - another.x, this.y - another.y)
+    }
+    get length() {
+        return Math.sqrt((this.x * this.x) + (this.y * this.y))
+    }
+}
+  function frame(time) {
+    if (lastTime != null) {
+      updateAnimation(Math.min(100, time - lastTime) / 1000);
+    }
+    lastTime = time;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  let ball = {
+    x: 50,
+    y: 50
+  };
+  let speed = 3;
+  let startingAngle = 70;
+  let rad = 20;
+  let moveX = Math.cos(Math.PI / 180 * startingAngle) * speed;
+  let moveY = Math.sin(Math.PI / 180 * startingAngle) * speed;
+  function updateAnimation() {
+    cx.clearRect(0, 0, 400, 400);
+    cx.lineWidth = 5;
+    cx.strokeRect(25, 25, 365, 365);
+    if (ball.x > 390 - rad || ball.x < 25 + rad) moveX = -moveX;
+    if (ball.y > 390 - rad || ball.y < 25 + rad) moveY = -moveY;
+    ball.x += moveX;
+    ball.y += moveY;
+    cx.beginPath();
+    cx.fillStyle = 'red';
+    cx.arc(ball.x, ball.y, rad, 0, Math.PI * 2);
+    cx.fill();
+    cx.closePath();
+  }
+</script>
+</body>
+</html>

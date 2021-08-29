@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+<textarea id="code">return "hi";</textarea>
+<button id="button">Run</button>
+<pre id="output"></pre>
+
+<script>
+    let textarea = document.querySelector("textarea"),
+        btn = document.getElementById("button"),
+        output = document.getElementById("output");
+    btn.addEventListener("click", event => {
+        try{
+            let text = textarea.value;
+            let result = Function("", text);
+            output.textContent = result();
+        }catch (e) {
+            output.textContent = "Error raised: " + e;
+        }
+    })
+</script>
+</body>
+</html>

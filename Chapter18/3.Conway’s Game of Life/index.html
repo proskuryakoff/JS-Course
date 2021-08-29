@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+    <div id="grid"></div>
+    <button id="next">Next generation</button>
+    <script>
+      let cols = 20;
+      let rows = 20;
+      let grid = document.getElementById("grid");
+      let btn = document.getElementById("next");
+      let checkboxes = [];
+      for (let i = 0; i < rows; i++){
+          checkboxes[i] = [];
+      for (let j = 0; j < cols; j++){
+          let checkbox = document.createElement("input");
+          checkbox.setAttribute("type", "checkbox");
+          checkbox.checked = Math.random() < 0.2;
+          checkboxes[i][j] = checkbox;
+        }
+      }
+      function createGrid(){
+        let resultTable = document.createElement("table");
+        for (let i = 0; i < rows; i++){
+        let row = document.createElement("tr");
+        for (let j = 0; j < cols; j++){
+          let cell = document.createElement("td");
+          cell.appendChild(checkboxes[i][j]);
+          row.appendChild(cell);  
+        }
+        resultTable.appendChild(row);
+      }
+      grid.appendChild(resultTable);
+      }
+
+      function countAliveNeighbours(i, j){
+        let counter = 0;
+        for (let m = Math.max(0, i - 1); m <= Math.min(rows - 1, i + 1); m++){
+          for (let n = Math.max(0, j - 1); n <= Math.min(rows - 1, j + 1); n++){
+            if (m < 0 || n < 0 || m > rows - 1 || n > cols - 1) continue;
+            else if ((m != i || n != j) && checkboxes[m][n].checked) counter++;
+          }
+        }
+        return counter;
+      }
+  
+      function newGeneration(){
+        let newGrid = checkboxes;
+        for (let i = 0; i < rows; i++){
+          for (let j = 0; j < cols; j++){
+            if (countAliveNeighbours(i, j) > 3 || countAliveNeighbours(i, j) < 2 && newGrid[i][j].checked == true) newGrid[i][j].checked = false;
+            if (countAliveNeighbours(i, j) == 3 && newGrid[i][j].checked == false) newGrid[i][j].checked = true;
+            if (countAliveNeighbours(i, j) == 3 || countAliveNeighbours(i, j) == 2 && newGrid[i][j].checked == true) newGrid[i][j].checked == true;
+          }
+        }
+        return newGrid;
+      }
+
+      function updateGrid(){
+        grid.removeChild(grid.firstChild);
+        let updGrid = newGeneration();
+        let newTable = document.createElement("table");
+        for (let i = 0; i < rows; i++){
+        let row = document.createElement("tr");
+        for (let j = 0; j < cols; j++){
+          let cell = document.createElement("td");
+          cell.appendChild(updGrid[i][j]);
+          row.appendChild(cell);  
+        }
+        newTable.appendChild(row);
+      }
+      grid.appendChild(newTable);
+      }
+
+      btn.addEventListener("click", event => updateGrid());
+      createGrid();
+      countAliveNeighbours();
+    </script>
+</body>
+</html>
