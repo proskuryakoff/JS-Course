@@ -41,7 +41,7 @@
       function countAliveNeighbours(i, j){
         let counter = 0;
         for (let m = Math.max(0, i - 1); m <= Math.min(rows - 1, i + 1); m++){
-          for (let n = Math.max(0, j - 1); n <= Math.min(rows - 1, j + 1); n++){
+          for (let n = Math.max(0, j - 1); n <= Math.min(cols - 1, j + 1); n++){
             if (m < 0 || n < 0 || m > rows - 1 || n > cols - 1) continue;
             else if ((m != i || n != j) && checkboxes[m][n].checked) counter++;
           }
@@ -50,33 +50,27 @@
       }
   
       function newGeneration(){
-        let newGrid = checkboxes;
+        let gridPrevious = checkboxes;
+        let newGrid = new Array (cols * rows);
         for (let i = 0; i < rows; i++){
+          newGrid[i] = [];
           for (let j = 0; j < cols; j++){
-            if (countAliveNeighbours(i, j) > 3 || countAliveNeighbours(i, j) < 2 && newGrid[i][j].checked == true) newGrid[i][j].checked = false;
-            if (countAliveNeighbours(i, j) == 3 && newGrid[i][j].checked == false) newGrid[i][j].checked = true;
-            if (countAliveNeighbours(i, j) == 3 || countAliveNeighbours(i, j) == 2 && newGrid[i][j].checked == true) newGrid[i][j].checked == true;
+            if (countAliveNeighbours(i, j) > 3 || countAliveNeighbours(i, j) < 2 && gridPrevious[i][j].checked == true) newGrid[i][j]= false;
+            if (countAliveNeighbours(i, j) == 3 && gridPrevious[i][j].checked == false) newGrid[i][j] = true;
+            if (countAliveNeighbours(i, j) == 3 || countAliveNeighbours(i, j) == 2 && gridPrevious[i][j].checked == true) newGrid[i][j] = true;
           }
         }
         return newGrid;
       }
 
       function updateGrid(){
-        grid.removeChild(grid.firstChild);
-        let updGrid = newGeneration();
-        let newTable = document.createElement("table");
+        let updGridState = newGeneration();
         for (let i = 0; i < rows; i++){
-        let row = document.createElement("tr");
-        for (let j = 0; j < cols; j++){
-          let cell = document.createElement("td");
-          cell.appendChild(updGrid[i][j]);
-          row.appendChild(cell);  
+          for (let j = 0; j < cols; j++){
+            checkboxes[i][j].checked = updGridState[i][j];
+          }
         }
-        newTable.appendChild(row);
       }
-      grid.appendChild(newTable);
-      }
-
       btn.addEventListener("click", event => updateGrid());
       createGrid();
       countAliveNeighbours();
